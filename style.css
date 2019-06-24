@@ -1,0 +1,140 @@
+/* ----------------- General CSS ----------------- */
+body {
+    background-image: url("assets/images/jan-gottweiss-1576476-unsplash.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.fa {
+    color: #fff;
+    font-size: 22pt;
+}
+
+
+/* ----------------- login Page CSS ----------------- */
+#login-page-padding {
+    padding: 50px;
+}
+
+@media (max-width: 575.98px) {
+    #login-page-padding {
+        padding: 0px;
+    }
+}
+
+@media (min-width: 576px) {
+    #login-page-padding {
+        padding: 0px;
+    }
+}
+
+@media (min-width: 768px) {
+    #login-page-padding {
+        padding: 0px;
+    }
+}
+
+@media (min-width: 992px) {
+    #login-page-padding {
+        padding: 20px;
+    }
+}
+
+form {
+    background-color: #fff;
+    padding: 40px;
+}
+
+#login-form {
+    margin-top: 200px;
+}
+
+
+/* ----------------- Trail Home Page CSS ----------------- */
+
+/* Featured Image CSS */
+#featured-image {
+    background-image: url("https://media.giphy.com/media/tLxsi1ABsIfza/giphy.gif");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+#navbarToggleExternalContent {
+    margin-top: 50px;
+}
+
+#search-form {
+    padding-top: 200px;
+}
+
+#page-content {
+    margin-top: 100px;
+}
+
+#main-content {
+    padding-bottom: 50px;
+}
+
+/* Card CSS */
+.card:hover {
+    cursor: pointer;
+}
+
+#trailThumbnail{
+    height: 100px;
+    width: 100px;
+}
+
+.card-select {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 15px;
+    height: 50px;
+    width: 50px;
+}
+
+.icon-select {
+    color: black;
+    font-size: 30pt;
+    margin-top: 10px;
+}
+
+.icon-select:hover {
+    color: yellow;
+}
+
+.trail-difficulty {
+    width: 20px;
+}
+
+/* Modal CSS */
+
+
+/* Saved Trails */
+.smallicon-select {
+    color: black;
+    font-size: 20pt;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.smallicon-select:hover {
+    color: yellow;
+}
+
+/* ----------------- User Profile Page CSS ----------------- */
+#profile-page-background {
+    padding: 50px;
+    background-image: url("assets/images/michael-benz-258430-unsplash.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
