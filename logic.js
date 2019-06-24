@@ -143,7 +143,7 @@ method: "GET",
     .then(function(){
       
       
-      queryurlForcast = "http://api.apixu.com/v1/forecast.json?key=452ecb2ccebe475b919202954191706&q=" + TrailLocation + "&days=1"
+      queryurlForcast = "https://api.apixu.com/v1/forecast.json?key=452ecb2ccebe475b919202954191706&q=" + TrailLocation + "&days=1"
       $.ajax({
         url: queryurlForcast,
         method: "GET"
