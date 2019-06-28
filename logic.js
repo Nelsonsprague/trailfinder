@@ -96,7 +96,6 @@ trailList = trailResponse.trails;//storing the trail array
   // console.log("name", trailList[i].name)
   // console.log("stars", trailList[i].stars)
   TrailLocation = trailList[i].location;
-  console.log(TrailLocation)
   // console.log("location", trailList[i].location)
   // console.log("difficulty", trailList[i].difficulty)
   // console.log("summery", trailList[i].summary)
@@ -106,51 +105,35 @@ trailList = trailResponse.trails;//storing the trail array
 }
 })
 
-  .then(function(){
+ .then(function(){
+    idList.push(trailList[i].id);
     
-      queryurlForcast = "http://api.apixu.com/v1/forecast.json?key=452ecb2ccebe475b919202954191706&q=" + TrailLocation + "&days=1"
-      $.ajax({
-        url: queryurlForcast,
-        method: "GET"
-      })
-      .then(function(forcastResponse){
-        // console.log(TrailLocation)
-        locationLat = forcastResponse.location.lat
-        locationLon = forcastResponse.location.lon
-        locationCode = forcastResponse.forecast.forecastday[0].day.condition.code
-        // console.log(forcastResponse)
-        // console.log(forcastResponse.forecast.forecastday[0].day.condition.code)
-        // console.log(locationCode)
+    // if((TrailConditionStatus === "All Clear")){
+      $("#search").on("click", function() {
         
-      }) .then(function(){
-      
-          idList.push(trailList[i].id);
-          console.log(locationCode)
-          
-          
-          if((TrailConditionStatus === "All Clear")&&(locationCode===1003||locationCode===1000)){
-            $("#search").on("click", function() {
-            
-            for(i=0; i<trailList.length; i++){
+        
+        
+              for(i=0; i<trailList.length; i++){
+                // console.log(locationCode)
               console.log("name ", TrailName)
-            console.log("Pic ", TrailImg)
-            console.log("stars ", TrailStars)
-            console.log("location ", TrailLocation)
-            console.log("difficulty ", TrailDifficulty)
-            console.log("summary ", TrailSummary)
-            console.log("ascent ", TrailAscent)
-            console.log("condition status ", TrailConditionStatus)
+            // console.log("Pic ", TrailImg)
+            // console.log("stars ", TrailStars)
+            console.log("location ", trailList[i].location)
+            // console.log("difficulty ", TrailDifficulty)
+            // console.log("summary ", TrailSummary)
+            // console.log("ascent ", TrailAscent)
+            // console.log("condition status ", TrailConditionStatus)
             // console.log("ID ", trailID)
-            console.log("weather Code ", locationCode)
+            // console.log("weather Code ", locationCode)
             generateButtons();
             }
           });
 
-        }
+        // }
       
       
       })
-    })
+    
     // console.log(idList)
   
   
@@ -249,10 +232,12 @@ if (favorites.indexOf(trailID)===-1){
 
 
 function generateButtons(){
-
+console.log(trailList);
+console.log(TrailLocation)
+getWeather(TrailLocation, i);
 var newCard = $("<div>");
 newCard.addClass("col-sm-12 col-md-6 col-lg-6 col-xl-4");
-
+newCard.attr('id', "button" + i);
 // card container
 var cardContainer = $("<div>");
 cardContainer.addClass("card mt-3");
@@ -432,4 +417,24 @@ modalContent.append(modalBody);
 // modal footer inside modal content
 modalContent.append(modalFooter);
     modalFooter.append(modalFooterButton);
+}
+
+function getWeather(TrailLocation){
+  
+  
+    queryurlForcast = "http://api.apixu.com/v1/forecast.json?key=452ecb2ccebe475b919202954191706&q=" + TrailLocation + "&days=1"
+    $.ajax({
+      url: queryurlForcast,
+      method: "GET"
+    })
+    .then(function(forcastResponse){
+      console.log("trail location location", TrailLocation)
+      locationLat = forcastResponse.location.lat
+      locationLon = forcastResponse.location.lon
+      locationCode = forcastResponse.forecast.forecastday[0].day.condition.code
+      // console.log(forcastResponse)
+      // console.log(forcastResponse.forecast.forecastday[0].day.condition.code)
+      // console.log(locationCode)
+      
+    })
 }
