@@ -77,20 +77,21 @@ method: "GET",
 
 .then(function(trailResponse){
 // console.log(trailResponse)
+trailList = trailResponse.trails;//storing the trail array
+console.log(trailList)
 
 for(var i=0; i<trailResponse.trails.length; i++){
-// Recommeded trail information
-TrailImg = trailResponse.trails[i].imgSmall
-TrailName = trailResponse.trails[i].name //And probably the first 5 mountians for all but im using index 0 as example.
-TrailStars = trailResponse.trails[i].stars
-TrailLocation = trailResponse.trails[i].location
-
-TrailConditionStatus = trailResponse.trails[i].conditionStatus 
-TrailDifficulty = trailResponse.trails[i].difficulty
-TrailSummary = trailResponse.trails[i].summary
-TrailAscent = trailResponse.trails[i].ascent
-TrailID = trailResponse.trails[i].id // Display ID for user search of trails
-trailList = trailResponse.trails;//storing the trail array
+  // Recommeded trail information
+  TrailImg = trailResponse.trails[i].imgSmall
+  TrailName = trailResponse.trails[i].name //And probably the first 5 mountians for all but im using index 0 as example.
+  TrailStars = trailResponse.trails[i].stars
+  TrailLocation = trailResponse.trails[i].location
+  
+  TrailConditionStatus = trailResponse.trails[i].conditionStatus 
+  TrailDifficulty = trailResponse.trails[i].difficulty
+  TrailSummary = trailResponse.trails[i].summary
+  TrailAscent = trailResponse.trails[i].ascent
+  TrailID = trailResponse.trails[i].id // Display ID for user search of trails
 // console.log(trailList)
   // console.log("Pic", trailList[i].imgSmall)
   // console.log("name", trailList[i].name)
@@ -106,27 +107,26 @@ trailList = trailResponse.trails;//storing the trail array
 })
 
  .then(function(){
-    idList.push(trailList[i].id);
+    // idList.push(trailList[i].id);
     
     // if((TrailConditionStatus === "All Clear")){
       $("#search").on("click", function() {
         
         
-        
-              for(i=0; i<trailList.length; i++){
-                // console.log(locationCode)
-              console.log("name ", TrailName)
-            // console.log("Pic ", TrailImg)
-            // console.log("stars ", TrailStars)
-            console.log("location ", trailList[i].location)
-            // console.log("difficulty ", TrailDifficulty)
-            // console.log("summary ", TrailSummary)
-            // console.log("ascent ", TrailAscent)
-            // console.log("condition status ", TrailConditionStatus)
-            // console.log("ID ", trailID)
-            // console.log("weather Code ", locationCode)
-            generateButtons();
-            }
+        for(i=0; i<trailList.length; i++){
+          // console.log(locationCode)
+          // console.log("name ", TrailName)
+          // console.log("Pic ", TrailImg)
+          // console.log("stars ", TrailStars)
+          // console.log("location ", trailList[i].location)
+          // console.log("difficulty ", TrailDifficulty)
+          // console.log("summary ", TrailSummary)
+          // console.log("ascent ", TrailAscent)
+          // console.log("condition status ", TrailConditionStatus)
+          // console.log("ID ", trailID)
+          // console.log("weather Code ", locationCode)
+          generateButtons();
+        }
           });
 
         // }
@@ -232,12 +232,14 @@ if (favorites.indexOf(trailID)===-1){
 
 
 function generateButtons(){
-console.log(trailList);
-console.log(TrailLocation)
+  TrailLocation = trailList[i].location
+// console.log(TrailLocation);
+
 getWeather(TrailLocation, i);
+// console.log(locationCode)
 var newCard = $("<div>");
 newCard.addClass("col-sm-12 col-md-6 col-lg-6 col-xl-4");
-newCard.attr('id', "button" + i);
+newCard.attr('id', "button-" + i);
 // card container
 var cardContainer = $("<div>");
 cardContainer.addClass("card mt-3");
@@ -419,22 +421,31 @@ modalContent.append(modalFooter);
     modalFooter.append(modalFooterButton);
 }
 
-function getWeather(TrailLocation){
+function getWeather(TrailLocation, i){
   
-  
-    queryurlForcast = "http://api.apixu.com/v1/forecast.json?key=452ecb2ccebe475b919202954191706&q=" + TrailLocation + "&days=1"
-    $.ajax({
-      url: queryurlForcast,
-      method: "GET"
-    })
-    .then(function(forcastResponse){
-      console.log("trail location location", TrailLocation)
+  queryurlForcast = "http://api.apixu.com/v1/forecast.json?key=452ecb2ccebe475b919202954191706&q=" + TrailLocation + "&days=1"
+  $.ajax({
+    url: queryurlForcast,
+    method: "GET"
+  })
+  .then(function(forcastResponse){
+    
+    setTimeout(function(){
+
+      
       locationLat = forcastResponse.location.lat
       locationLon = forcastResponse.location.lon
       locationCode = forcastResponse.forecast.forecastday[0].day.condition.code
       // console.log(forcastResponse)
       // console.log(forcastResponse.forecast.forecastday[0].day.condition.code)
-      // console.log(locationCode)
+      console.log(locationCode)
+      console.log(i)
+      // $("#button-" + i).attr("data-code", locationCode)
+      if((!locationCode===1003) || (!locationCode===1000)){
+        // $("#button-" + i).attr("style", "display: none")
+      }
+    }, 3000)
+    
       
     })
 }
