@@ -100,16 +100,7 @@ $.ajax({
       TrailSummary = trailResponse.trails[i].summary;
       TrailAscent = trailResponse.trails[i].ascent;
       TrailID = trailResponse.trails[i].id; // Display ID for user search of trails
-      // console.log(trailList)
-      // console.log("Pic", trailList[i].imgSmall)
-      // console.log("name", trailList[i].name)
-      // console.log("stars", trailList[i].stars)
       TrailLocation = trailList[i].location;
-      // console.log("location", trailList[i].location)
-      // console.log("difficulty", trailList[i].difficulty)
-      // console.log("summery", trailList[i].summary)
-      // console.log("ascent", trailList[i].ascent)
-      // console.log("ID ", trailResponse.trails[i].id)
       idList.push(trailResponse.trails[i].id);
     }
   })
